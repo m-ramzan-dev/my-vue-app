@@ -1,6 +1,5 @@
 <script setup>
 import { computed, ref } from "vue";
-
 let id = 0;
 const todo = ref("");
 const hideCompleted = ref(false);
@@ -33,7 +32,7 @@ function toggleCompleted() {
 
 <template>
   <div class="hello">
-    <h1>Welcome to My App</h1>
+    <h1>{{ msg || "Welcome to My Vue App" }}</h1>
     <form @submit.prevent="addTodo">
       <input v-model="todo" required placeholder="Enter new to do" />
       <button>Add Todo</button>
