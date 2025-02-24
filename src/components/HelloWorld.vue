@@ -1,22 +1,31 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 let id = 0;
 const todo = ref("");
+const hideCompleted = ref(false);
 
 const todos = ref([
-  { id: id++, text: "Learn Vue" },
-  { id: id++, text: "Learn Laravel" },
-  { id: id++, text: "Learn Flutter" },
+  { id: id++, text: "Learn Vue", done: true },
+  { id: id++, text: "Learn Laravel", done: true },
+  { id: id++, text: "Learn Flutter", done: false },
 ]);
 
+const filteredTodos = computed(() => {
+  return hideCompleted.value ? todos.value.filter((t) => !t.done) : todos.value;
+});
+
 function addTodo() {
-  todos.value.push({ id: id++, text: todo.value });
+  todos.value.push({ id: id++, text: todo.value, done: false });
   todo.value = "";
 }
 
 function removeTodo(todo) {
   todos.value = todos.value.filter((t) => t !== todo);
+}
+
+function toggleCompleted() {
+  hideCompleted.value = !hideCompleted.value;
 }
 </script>
 
@@ -31,11 +40,15 @@ function removeTodo(todo) {
     </form>
 
     <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        {{ todo.text }}
+      <li v-for="todo in filteredTodos" :key="todo.id">
+        <input type="checkbox" v-model="todo.done" />
+        <span :class="{ done: todo.done }">{{ todo.text }}</span>
         <button @click="removeTodo(todo)">x</button>
       </li>
     </ul>
+    <button @click="toggleCompleted">
+      {{ hideCompleted ? "Show all" : "Hide completed" }}
+    </button>
   </div>
 </template>
 
@@ -55,5 +68,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.done {
+  text-decoration: line-through;
 }
 </style>
