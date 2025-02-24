@@ -1,17 +1,20 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <HelloWorld />
+  <VueHooks />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import VueHooks from "./components/VueHooks.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+    VueHooks,
+  },
+};
 </script>
 
 <style>
