@@ -9,6 +9,8 @@ const message = ref("Learning Vue Js");
 const tooltip = ref("Nice 👍");
 const isRed = ref(false);
 const color = ref("green");
+const showList = ref(true);
+const list = ref([1, 2, 3]);
 
 function reverse() {
   message.value = message.value.split("").reverse().join("");
@@ -32,6 +34,19 @@ function toggleColor() {
   >
   <button @click="reverse">Reverse Message</button>
   <button @click="append">Append !</button>
+  <div>
+    <button @click="showList = !showList">Toggle List</button>
+    <button @click="list.push(list.length + 1)">Push Number</button>
+    <button @click="list.pop()">Pop Number</button>
+    <button @click="list.reverse()">Reverse List</button>
+  </div>
+  <div>
+    <ul v-if="showList && list.length">
+      <li v-for="item in list" :key="item">{{ item }}</li>
+    </ul>
+    <p v-else-if="list.length">List is hidden</p>
+    <p v-else>List is empty</p>
+  </div>
 </template>
 
 <style scoped>
