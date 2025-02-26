@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import ListItem from "./ListItem.vue";
 const elementRef = ref(null);
 onMounted(() => {
   elementRef.value.textContent = "Using onMounted Life Cycle Method";
@@ -48,7 +49,7 @@ function toggleColor() {
   </div>
   <div>
     <ul v-if="showList && list.length">
-      <li v-for="item in list" :key="item">{{ item }}</li>
+      <ListItem v-for="item in list" :key="item" :item="item"></ListItem>
     </ul>
     <p v-else-if="list.length">List is hidden</p>
     <p v-else>List is empty</p>
