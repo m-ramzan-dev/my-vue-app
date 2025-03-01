@@ -1,10 +1,7 @@
-<script setup>
-</script>
-
 <template>
-  <header>
-    <h1>Event Booking App</h1>
-  </header>
-
-  <main></main>
+  <main class="bg-gray mx-auto space-y-8">
+    <h1 class="text-4xl font-medium">Event Booking App</h1>
+    <h2 class="text-2xl font-medium">All Events</h2>
+    <h2 class="text-2xl font-medium">Your Bookings</h2>
+  </main>
 </template>
