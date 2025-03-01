@@ -1,25 +1,25 @@
 <template>
   <div>
-    <h1>Home Screen</h1>
+    <h1>Tasks View Screen</h1>
     <RouterLink to="/projects">Go to Projects</RouterLink>
     <ul>
-      <li v-for="project in projects" :key="project.id">
-        {{ project.name }}
+      <li v-for="task in tasks" :key="task.id">
+        {{ task.name }}
       </li>
     </ul>
   </div>
 </template>
-
+  
 <script setup >
 import { supabase } from "@/lib/supabaseClient";
 import { onMounted, ref } from "vue";
 
-const projects = ref([]);
-const fetchProjects = async () => {
-  const { data, error } = await supabase.from("projects").select();
+const tasks = ref([]);
+const fetchTasks = async () => {
+  const { data, error } = await supabase.from("tasks").select();
   if (error) console.log(error);
   console.log(data);
-  projects.value = data;
+  tasks.value = data;
 };
-onMounted(fetchProjects);
+onMounted(fetchTasks);
 </script>

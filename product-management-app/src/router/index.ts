@@ -21,6 +21,11 @@ const router = createRouter({
     component:() => import('@/views/SingleProjectView.vue')
    },
    {
+    path:'/tasks',
+    name:"Tasks",
+    component:() => import('@/views/TasksView.vue')
+   },
+   {
     path:'/:pathMatch(.*)*',
     name:"NotFound",
     component:h('p',{style:'color:red'},'Page not found')
