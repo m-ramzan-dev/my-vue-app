@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import { supabase } from "./lib/supabaseClient";
+console.log(supabase);
 </script>
 
 <template>
-  <h1>Welcome To Vue Development</h1>
+  <main>
+    <RouterView />
+  </main>
 </template>
