@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker/locale/en_US'; // Faker with en_US locale
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.VITE_SUPABASE_ANON_KEY);
-console.log('supabase', supabase);
+
 
 const seedProjects = async (n) => {
     for(let i = 0; i < n; i++) {
