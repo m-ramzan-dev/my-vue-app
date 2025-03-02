@@ -15,12 +15,18 @@
     "db:migrate:new": "supabase migration new",
     "db:reset": "supabase db reset --linked",
     "db:seed": "node database/seed.js",
-    "database:types":"npx supabase gen types typescript --project-id lbrpchqamjuzxlhleksn --schema public > database/types.ts"
+    "database:types": "npx supabase gen types typescript --project-id lbrpchqamjuzxlhleksn --schema public > database/types.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
+    "lucide-vue-next": "^0.477.0",
     "pinia": "^3.0.1",
+    "radix-vue": "^1.9.17",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
@@ -30,8 +36,10 @@
     "@types/node": "^22.13.4",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
+    "autoprefixer": "^10.4.20",
     "npm-run-all2": "^7.0.2",
     "supabase": "^2.15.8",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.7.3",
     "vite": "^6.1.0",
     "vite-plugin-vue-devtools": "^7.7.2",
