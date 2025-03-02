@@ -1,17 +1,20 @@
 <template>
-  <div class="bg-white border border-gray-200 rounded-md">
+  <RoundedCard>
     <h3 class="font-medium text-xl p-4 border-b border-gray-200">
       {{ title }}
     </h3>
     <p class="p-4 border-b border-gray-200">{{ date }}</p>
     <p class="p-4">{{ description }}</p>
     <section class="p-4 flex justify-end">
-      <Button label="Register" @click="$emit('register')" />
+      <RoundedButton @click="$emit('register')">
+        <pre>Register</pre>
+      </RoundedButton>
     </section>
-  </div>
+  </RoundedCard>
 </template>
 <script setup>
-import Button from "./Button.vue";
+import RoundedButton from "./RoundedButton.vue";
+import RoundedCard from "./RoundedCard.vue";
 defineProps({
   title: String,
   date: String,
