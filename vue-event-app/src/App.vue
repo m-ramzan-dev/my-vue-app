@@ -6,15 +6,22 @@
       <EventCard
         v-for="i in 8"
         :key="i"
-        title="Vue Conference 2024"
-        date="2024-05-01"
-        description="Developer Conference for Vue and JavaScript"
         @register="console.log('Registering...', i)"
-      />
+      >
+        <template v-slot:title>Vue Conference 2024</template>
+        <template v-slot:description
+          >Developer Conference for Vue and JavaScript</template
+        >
+        <template v-slot:date>2024-05-01</template>
+      </EventCard>
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
+    <RoundedCard>
+      <h3 class="p-4 text-xl">Vue Js Conference on 24 March 2024</h3>
+    </RoundedCard>
   </main>
 </template>
 <script setup>
 import EventCard from "./components/EventCard.vue";
+import RoundedCard from "./components/RoundedCard.vue";
 </script>

@@ -1,10 +1,10 @@
 <template>
   <RoundedCard>
     <h3 class="font-medium text-xl p-4 border-b border-gray-200">
-      {{ title }}
+      <slot name="title"></slot>
     </h3>
-    <p class="p-4 border-b border-gray-200">{{ date }}</p>
-    <p class="p-4">{{ description }}</p>
+    <p class="p-4 border-b border-gray-200"><slot name="date"></slot></p>
+    <p class="p-4"><slot name="description"></slot></p>
     <section class="p-4 flex justify-end">
       <RoundedButton @click="$emit('register')">
         <pre>Register</pre>
