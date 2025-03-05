@@ -1,19 +1,19 @@
 <template>
-  <main class="bg-gray mx-auto space-y-8 p-8">
+  <main class="bg-gray-100 mx-auto space-y-8 p-8">
     <h1 class="text-4xl font-medium">Event Booking App</h1>
     <h2 class="text-2xl font-medium">All Events</h2>
-    <section class="grid grid-cols-2 gap-8">
+    <section v-if="eventsLoading" class="text-center">
+      <EventLoadingComponent />
+    </section>
+    <section v-else class="grid grid-cols-2 gap-8">
       <EventCard
-        v-for="i in 8"
-        :key="i"
-        @register="console.log('Registering...', i)"
-      >
-        <template v-slot:title>Vue Conference 2024</template>
-        <template v-slot:description
-          >Developer Conference for Vue and JavaScript</template
-        >
-        <template v-slot:date>2024-05-01</template>
-      </EventCard>
+        v-for="event in events"
+        :key="event.id"
+        :title="event.title"
+        :date="event.date"
+        :description="event.description"
+        @register="console.log('Registering...', event)"
+      ></EventCard>
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
     <RoundedCard>
@@ -26,8 +26,31 @@
     </RoundedCard>
   </main>
 </template>
+
 <script setup>
 import EventCard from "./components/EventCard.vue";
 import RoundedCard from "./components/RoundedCard.vue";
 import RoundedButton from "./components/RoundedButton.vue";
+import EventLoadingComponent from "./components/EventLoadingComponent.vue";
+import { onMounted, ref } from "vue";
+
+const events = ref([]);
+const eventsLoading = ref(false);
+const error = ref(null);
+
+async function fetchEvents() {
+  console.log("Fetching events...");
+  eventsLoading.value = true;
+  try {
+    const response = await fetch("http://localhost:3001/events");
+    events.value = await response.json();
+  } catch (err) {
+    error.value = "Failed to load events.";
+    console.error(err);
+  } finally {
+    eventsLoading.value = false;
+  }
+}
+
+onMounted(() => fetchEvents());
 </script>
