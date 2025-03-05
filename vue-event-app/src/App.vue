@@ -17,11 +17,17 @@
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
     <RoundedCard>
-      <h3 class="p-4 text-xl">Vue Js Conference on 24 March 2024</h3>
+      <div class="flex justify-between items-center">
+        <h3 class="p-4 text-xl">Vue Js Conference on 24 March 2024 - Status</h3>
+        <div class="px-6">
+          <RoundedButton variant="danger">Cancel</RoundedButton>
+        </div>
+      </div>
     </RoundedCard>
   </main>
 </template>
 <script setup>
 import EventCard from "./components/EventCard.vue";
 import RoundedCard from "./components/RoundedCard.vue";
+import RoundedButton from "./components/RoundedButton.vue";
 </script>
