@@ -16,7 +16,11 @@
       ></EventCard>
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
+
     <section class="grid grid-col-1 gap-4">
+      <template v-if="bookingLoading">
+        <BookedEventLoading v-for="i in 4" :key="i" />
+      </template>
       <BookedEventCard
         v-for="booking in bookings"
         :key="booking.id"
@@ -30,6 +34,7 @@
 import EventCard from "./components/EventCard.vue";
 import EventLoadingComponent from "./components/EventLoadingComponent.vue";
 import BookedEventCard from "./components/BookedEventCard.vue";
+import BookedEventLoading from "./components/BookedEventLoading.vue";
 import { onMounted, ref } from "vue";
 
 const events = ref([]);
