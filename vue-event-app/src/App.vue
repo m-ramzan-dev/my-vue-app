@@ -26,6 +26,7 @@
         :key="booking.id"
         :title="booking.event_title"
         :status="booking.status"
+        @cancel="cancelBooking(booking.id)"
       />
     </section>
   </main>
@@ -94,6 +95,29 @@ async function fetchBookings() {
     bookings.value = await response.json();
   } finally {
     bookingLoading.value = false;
+  }
+}
+async function cancelBooking(bookingId) {
+  const index = bookings.value.findIndex((b) => b.id === bookingId);
+  if (index === -1) return;
+
+  const originalBooking = { ...bookings.value[index] };
+  bookings.value.splice(index, 1);
+
+  try {
+    const response = await fetch(
+      `http://localhost:3001/bookings/${bookingId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to cancel booking.");
+    }
+    console.log(`Booking ${bookingId} canceled successfully`);
+  } catch (e) {
+    console.error(e);
+    bookings.value.splice(index, 0, originalBooking);
   }
 }
 

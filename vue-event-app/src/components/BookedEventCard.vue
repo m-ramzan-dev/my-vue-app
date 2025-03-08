@@ -9,7 +9,9 @@
       </div>
 
       <div class="px-6">
-        <RoundedButton variant="danger">Cancel</RoundedButton>
+        <RoundedButton variant="danger" @click="$emit('cancel')"
+          >Cancel</RoundedButton
+        >
       </div>
     </div>
   </RoundedCard>
@@ -21,4 +23,5 @@ defineProps({
   title: String,
   status: String,
 });
+defineEmits(["cancel"]);
 </script>
