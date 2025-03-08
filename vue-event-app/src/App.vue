@@ -25,6 +25,7 @@
         v-for="booking in bookings"
         :key="booking.id"
         :title="booking.event_title"
+        :status="booking.status"
       />
     </section>
   </main>
@@ -57,19 +58,33 @@ async function fetchEvents() {
   }
 }
 async function bookEvent(event) {
+  if (bookings.value.some((b) => b.event_id === event.id)) {
+    alert("You have already booked this event.");
+    return;
+  }
   const booking = {
     id: Date.now().toString(),
     user_id: 1,
     event_id: event.id,
     event_title: event.title,
+    status: "pending",
   };
+  bookings.value.push(booking);
   try {
     const response = await fetch("http://localhost:3001/bookings", {
       method: "POST",
       body: JSON.stringify({ ...booking, status: "confirmed" }),
       headers: { "Content-Type": "application/json" },
     });
-  } finally {
+    if (response.ok) {
+      const index = bookings.value.findIndex((b) => b.id === booking.id);
+      bookings.value[index] = await response.json();
+    } else {
+      throw new Error("Failed to book event.");
+    }
+  } catch (e) {
+    console.log(e);
+    bookings.value = bookings.value.filter((b) => b.id !== booking.id);
   }
 }
 async function fetchBookings() {
