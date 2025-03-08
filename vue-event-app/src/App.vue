@@ -16,26 +16,25 @@
       ></EventCard>
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
-    <RoundedCard>
-      <div class="flex justify-between items-center">
-        <h3 class="p-4 text-xl">Vue Js Conference on 24 March 2024 - Status</h3>
-        <div class="px-6">
-          <RoundedButton variant="danger">Cancel</RoundedButton>
-        </div>
-      </div>
-    </RoundedCard>
+    <section class="grid grid-col-1 gap-4">
+      <BookedEventCard
+        v-for="booking in bookings"
+        :key="booking.id"
+        :title="booking.event_title"
+      />
+    </section>
   </main>
 </template>
 
 <script setup>
 import EventCard from "./components/EventCard.vue";
-import RoundedCard from "./components/RoundedCard.vue";
-import RoundedButton from "./components/RoundedButton.vue";
 import EventLoadingComponent from "./components/EventLoadingComponent.vue";
+import BookedEventCard from "./components/BookedEventCard.vue";
 import { onMounted, ref } from "vue";
 
 const events = ref([]);
 const eventsLoading = ref(false);
+const bookings = ref([]);
 const bookingLoading = ref(false);
 const error = ref(null);
 
@@ -53,16 +52,33 @@ async function fetchEvents() {
   }
 }
 async function bookEvent(event) {
-  bookingLoading.value = true;
+  const booking = {
+    id: Date.now().toString(),
+    user_id: 1,
+    event_id: event.id,
+    event_title: event.title,
+  };
   try {
     const response = await fetch("http://localhost:3001/bookings", {
       method: "POST",
-      body: {},
+      body: JSON.stringify({ ...booking, status: "confirmed" }),
+      headers: { "Content-Type": "application/json" },
     });
+  } finally {
+  }
+}
+async function fetchBookings() {
+  bookingLoading.value = true;
+  try {
+    const response = await fetch("http://localhost:3001/bookings");
+    bookings.value = await response.json();
   } finally {
     bookingLoading.value = false;
   }
 }
 
-onMounted(() => fetchEvents());
+onMounted(() => {
+  fetchEvents();
+  fetchBookings();
+});
 </script>
