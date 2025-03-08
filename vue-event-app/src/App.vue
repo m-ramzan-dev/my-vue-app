@@ -12,7 +12,7 @@
         :title="event.title"
         :date="event.date"
         :description="event.description"
-        @register="console.log('Registering...', event)"
+        @register="bookEvent(event)"
       ></EventCard>
     </section>
     <h2 class="text-2xl font-medium">Your Bookings</h2>
@@ -36,6 +36,7 @@ import { onMounted, ref } from "vue";
 
 const events = ref([]);
 const eventsLoading = ref(false);
+const bookingLoading = ref(false);
 const error = ref(null);
 
 async function fetchEvents() {
@@ -49,6 +50,17 @@ async function fetchEvents() {
     console.error(err);
   } finally {
     eventsLoading.value = false;
+  }
+}
+async function bookEvent(event) {
+  bookingLoading.value = true;
+  try {
+    const response = await fetch("http://localhost:3001/bookings", {
+      method: "POST",
+      body: {},
+    });
+  } finally {
+    bookingLoading.value = false;
   }
 }
 
