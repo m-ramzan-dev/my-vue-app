@@ -51,17 +51,6 @@ async function fetchEvents() {
     eventsLoading.value = false;
   }
 }
-async function fetchBookings() {
-  bookingLoading.value = true;
-  try {
-    const response = await fetch("http://localhost:3001/bookings");
-    bookings.value = await response.json();
-  } catch (e) {
-    error.value = e;
-  } finally {
-    bookingLoading.value = false;
-  }
-}
 
 onMounted(() => {
   fetchEvents();
