@@ -34,6 +34,7 @@ import EventCard from "./EventCard.vue";
 import EventLoadingComponent from "./EventLoadingComponent.vue";
 import RoundedButton from "./RoundedButton.vue";
 import { onMounted, ref } from "vue";
+
 const events = ref([]);
 const eventsLoading = ref(false);
 const error = ref(null);
@@ -61,6 +62,7 @@ async function fetchBookings() {
     bookingLoading.value = false;
   }
 }
+
 onMounted(() => {
   fetchEvents();
 });
