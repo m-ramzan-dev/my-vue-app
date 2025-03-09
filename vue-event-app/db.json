@@ -31,31 +31,38 @@
   ],
   "bookings": [
     {
-      "id": "1741466229844",
-      "user_id": 1,
-      "event_id": "2",
-      "event_title": "Vue Conference 2023",
-      "status": "confirmed"
-    },
-    {
-      "id": "1741522877997",
+      "id": "1741524683060",
       "user_id": 1,
       "event_id": "1",
       "event_title": "Rails Conference 2024",
       "status": "confirmed"
     },
     {
-      "id": "1741522891928",
+      "id": "1741524684376",
+      "user_id": 1,
+      "event_id": "3",
+      "event_title": "PHP Conference 2022",
+      "status": "confirmed"
+    },
+    {
+      "id": "1741524685293",
       "user_id": 1,
       "event_id": "4",
       "event_title": "Rust Conference 2021",
       "status": "confirmed"
     },
     {
-      "id": "1741522893246",
+      "id": "1741524685943",
       "user_id": 1,
-      "event_id": "3",
-      "event_title": "PHP Conference 2022",
+      "event_id": "2",
+      "event_title": "Vue Conference 2023",
+      "status": "confirmed"
+    },
+    {
+      "id": "1741528612276",
+      "user_id": 1,
+      "event_id": "2",
+      "event_title": "Vue Conference 2023",
       "status": "confirmed"
     }
   ]

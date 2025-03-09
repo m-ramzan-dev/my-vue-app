@@ -1,12 +1,9 @@
 <template>
-  <template v-if="error">
-    <RoundedCard>
-      <div class="flex flex-col items-center space-y-4">
-        <div class="text-red-500 text-center">{{ error }}</div>
-        <RoundedButton @click="fetchEvents">Retry</RoundedButton>
-      </div>
-    </RoundedCard>
-  </template>
+  <template v-if="eventError">
+    <ErrorComponent :retry="fetchEvents">{{
+      eventError
+    }}</ErrorComponent></template
+  >
   <template v-else>
     <h2 class="text-2xl font-medium">All Events</h2>
     <section v-if="eventsLoading" class="text-center">
@@ -32,25 +29,11 @@
 <script setup>
 import EventCard from "./EventCard.vue";
 import EventLoadingComponent from "./EventLoadingComponent.vue";
-import RoundedButton from "./RoundedButton.vue";
-import { onMounted, ref } from "vue";
+import ErrorComponent from "./ErrorComponent.vue";
+import { onMounted } from "vue";
+import useBookings from "../composables/useBookings";
 
-const events = ref([]);
-const eventsLoading = ref(false);
-const error = ref(null);
-async function fetchEvents() {
-  console.log("Fetching events...");
-  eventsLoading.value = true;
-  try {
-    const response = await fetch("http://localhost:3001/events");
-    events.value = await response.json();
-  } catch (err) {
-    error.value = "Failed to load events.";
-    console.error(err);
-  } finally {
-    eventsLoading.value = false;
-  }
-}
+const { events, eventsLoading, eventError, fetchEvents } = useBookings();
 
 onMounted(() => {
   fetchEvents();

@@ -2,6 +2,11 @@ import {  ref } from "vue";
 const bookings = ref([]);
 const bookingLoading = ref(false);
 
+const events = ref([]);
+const eventsLoading = ref(false);
+const eventError = ref(null);
+const bookingError = ref(null);
+
 
 async function bookEvent(event) {
     if (bookings.value.some((b) => b.event_id === event.id)) {
@@ -34,10 +39,15 @@ async function bookEvent(event) {
     }
   }
   async function fetchBookings() {
+    bookingError.value = null;
     bookingLoading.value = true;
     try {
       const response = await fetch("http://localhost:3001/bookings");
       bookings.value = await response.json();
+      
+    }catch(e){
+        console.error(e);
+        bookingError.value =e;
     } finally {
       bookingLoading.value = false;
     }
@@ -66,6 +76,25 @@ async function bookEvent(event) {
     }
   }
 
+
+async function fetchEvents() {
+  console.log("Fetching events...");
+  eventsLoading.value = true;
+  eventError.value = null;
+  
+  try {
+    const response = await fetch("http://localhost:3001/events");
+    events.value = await response.json();
+    console.log("Events fetched successfully",response);
+    
+  } catch (err) {
+    eventError.value = err;
+    console.error(err);
+  } finally {
+    eventsLoading.value = false;
+  }
+}
+
   export default function useBookings  ()  {
-    return { bookings,bookingLoading,bookEvent, fetchBookings, cancelBooking };
+    return { bookings,bookingLoading,bookingError,bookEvent, fetchBookings, cancelBooking,fetchEvents,events,eventError,eventsLoading };
   }
