@@ -4,15 +4,15 @@
     <form class="space-y-4 mx-auto">
       <div>
         <label>Username</label>
-        <input type="text" />
+        <input type="text" v-model="general.name" />
       </div>
       <div>
         <label>Email</label>
-        <input type="email" />
+        <input type="email" v-model="general.email" />
       </div>
       <div>
         <label>About Me</label>
-        <textarea></textarea>
+        <textarea v-model="general.about"></textarea>
       </div>
       <div>
         <label>Gender</label>
@@ -31,7 +31,7 @@
       </div>
       <div>
         <label>Country</label>
-        <select>
+        <select v-model="general.country">
           <option>Pakistan</option>
           <option>USA</option>
           <option>Canada</option>
@@ -42,3 +42,7 @@
     </form>
   </div>
 </template>
+<script setup lang="ts">
+import { useSettings } from "../composables/useSettings";
+const { general } = useSettings();
+</script>
