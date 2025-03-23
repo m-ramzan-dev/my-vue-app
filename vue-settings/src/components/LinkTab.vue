@@ -1,3 +1,4 @@
+
 <template>
   <button
     @click="$emit('click')"
@@ -11,7 +12,7 @@
   </button>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, defineComponent } from "vue";
 import type { Tab } from "../types";
 const props = defineProps<{
   currentTab: string;
