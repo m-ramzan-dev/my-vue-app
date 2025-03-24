@@ -43,6 +43,8 @@ const currentTabComponent = computed(
         </li>
       </ul>
     </nav>
-    <component :is="currentTabComponent" />
+    <KeepAlive>
+      <component :is="currentTabComponent" />
+    </KeepAlive>
   </main>
 </template>

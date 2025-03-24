@@ -7,11 +7,18 @@ interface GeneralSettings{
     country:string,
     about:string
 }
-const general = ref<GeneralSettings>({
-    name:"",
-    email:"",
-    gender:"Male",
-    country:"Pakistan",
-    about:""
-});
-export default general;
+const general = ref<GeneralSettings>((()=>{
+    const stored  = localStorage.getItem('general');
+    return stored !== null ? JSON.parse(stored) : {
+        name:"",
+        email:"",
+        gender:"Male",
+        country:"Pakistan",
+        about:""
+    }
+})());
+export function useSettings(){
+    return {
+        general
+    }
+};
