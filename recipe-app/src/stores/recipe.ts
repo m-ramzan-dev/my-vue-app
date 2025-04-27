@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 interface Recipe {
-    id:number,
+    id:string,
     name:string,
     description:string
 }
@@ -9,13 +9,17 @@ interface Recipe {
 export const useRecipeStore = defineStore('recipeStore',()=>{
     const recipes = ref<Recipe[]>([]);
 
-    const addRecipe = (recipe: Recipe) =>{
-        recipes.value.push(recipe);
+    const addRecipe = (name:string,description:string) =>{
+        recipes.value.push({
+            id:Date.now().toString(),
+            name,
+            description
+        });
     }
-    const removeRecipe = (id: number) =>{
+    const removeRecipe = (id: string) =>{
         recipes.value = recipes.value.filter(recipe => recipe.id !== id);
     }
-    const getRecipe = (id: number) =>{
+    const getRecipe = (id: string) =>{
         return recipes.value.find(recipe => recipe.id === id);
     }
     const getAllRecipes= () =>{
@@ -24,7 +28,7 @@ export const useRecipeStore = defineStore('recipeStore',()=>{
     const clearRecipes = () =>{
         recipes.value = [];
     }
-    const updateRecipe = (id: number, updatedRecipe: Recipe) =>{
+    const updateRecipe = (id: string, updatedRecipe: Recipe) =>{
         const index = recipes.value.findIndex(recipe => recipe.id === id);
         if (index !== -1) {
             recipes.value[index] = { ...recipes.value[index], ...updatedRecipe };
