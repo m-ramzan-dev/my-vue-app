@@ -8,7 +8,14 @@ import router from './router'
 
 const app = createApp(App)
 
-app.use(createPinia())
+const pinia = createPinia();
+function outPlugin(){
+    return {
+        secret:"Dummy secret",
+    }
+}
+app.use(outPlugin)
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')
